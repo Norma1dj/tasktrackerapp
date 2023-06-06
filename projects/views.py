@@ -9,9 +9,7 @@ from projects.forms import CreateProjectForm
 @login_required()
 def list_projects(request):
     projects = Project.objects.filter(owner=request.user)
-    context = {
-        'projects': projects
-    }
+    context = {"projects": projects}
     return render(request, "list_projects.html", context)
 
 
@@ -20,18 +18,15 @@ def show_project(request, id):
     project = get_object_or_404(Project, id=id)
     project = Project.objects.get(id=id)
 
-    context = {
-        "project": project
-    }
-    return render(request, 'show_project.html', context)
+    context = {"project": project}
+    return render(request, "show_project.html", context)
+
 
 @login_required
 def create_project(request):
-
     if request.method == "POST":
-
         form = CreateProjectForm(request.POST)
-        if form.is_valid(): 
+        if form.is_valid():
             receipt = form.save(False)
             receipt.purchaser = request.user
             receipt.save()

@@ -3,11 +3,10 @@ from tasks.forms import CreateTaskForm
 from django.contrib.auth.decorators import login_required
 from tasks.models import Task
 
+
 @login_required()
 def create_task(request):
-
     if request.method == "POST":
-
         form = CreateTaskForm(request.POST)
         if form.is_valid():
             task = form.save()
