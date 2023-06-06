@@ -1,18 +1,15 @@
 from django.shortcuts import render, redirect
 from tasks.forms import CreateTaskForm
 from django.contrib.auth.decorators import login_required
-
-
-
-# Create your views here.
+from tasks.models import Task
 
 @login_required()
 def create_task(request):
-    
+
     if request.method == "POST":
 
         form = CreateTaskForm(request.POST)
-        if form.is_valid(): 
+        if form.is_valid():
             task = form.save()
             task.save()
 
@@ -26,17 +23,11 @@ def create_task(request):
     }
     return render(request, "create_task.html", context)
 
-# def create_task(request, project_id):
-#     project = Project.objects.get(id=project_id)
 
-#     if request.method == 'POST':
-#         form = CreateTaskForm(request.POST)
-#         if form.is_valid():
-#             task = form.save(commit=False)
-#             task.project = project
-#             task.save()
-#             return redirect('project_list')
-#     else:
-#         form = CreateTaskForm()
-
-#     return render(request, 'create_task.html', {'form': form, 'project': project})
+@login_required
+def show_my_tasks(request):
+    tasks = Task.objects.filter(assignee=request.user)
+    context = {
+        "tasks": tasks,
+    }
+    return render(request, "show_my_tasks.html", context)
