@@ -1,71 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    {% if user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'show_my_tasks' %}">My tasks</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'list_projects' %}">My projects</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'logout' %}">Logout</a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{% url 'login' %}">Login</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'signup' %}">Signup</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <div>
-                <h1>{{ project.name }}</h1>
-                <p>{{ project.description }}</p>
-                <h2>Tasks</h2>
-                <p>
-                    <a href="{% url 'create_task' %}">Create a new task</a>
-                </p>
-            </div>
-            {% if project.tasks.exists %}
-                <table>
-                    <thead>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Project Details
+{% endblock title %}
+{% block content %}
+    <header>
+        <div>
+            <a href="{% url 'list_projects' %}"><lord-icon src="https://cdn.lordicon.com/gmzxduhd.json" trigger="hover" colors="primary:#121331,secondary:#08a88a" style="width:50px"></a>
+            <a href="{% url 'show_my_tasks' %}"><lord-icon src="https://cdn.lordicon.com/nocovwne.json" trigger="hover" colors="primary:#121331,secondary:#08a88a" style="width:50px;">
+            </lord-icon></a>
+            </lord-icon>
+        </div>
+        <div>
+            <h1>{{ project.name }}</h1>
+            <p >{{ project.description }}</p>
+        </div>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                  
+                <div>
+                    <a href="{% url 'logout' %}">
+                        <lord-icon src="https://cdn.lordicon.com/moscwhoj.json" trigger="hover" colors="primary:#121331,secondary:#08a88a" style="width:50px;height:50px">
+                        </lord-icon>
+                    </lord-icon></a>
+                </div>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'signup' %}">Signup</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <h2>Tasks</h2>
+         
+        </div>
+        {% if project.tasks.exists %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Assignee</th>
+                        <th>Start date</th>
+                        <th>Due date</th>
+                        <th>Is completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in project.tasks.all %}
                         <tr>
-                            <th>Name</th>
-                            <th>Assignee</th>
-                            <th>Start date</th>
-                            <th>Due date</th>
-                            <th>Is completed</th>
+                            <td>{{ task.name }}</td>
+                            <td>{{ task.assignee.username }}</td>
+                            <td>{{ task.start_date }}</td>
+                            <td>{{ task.due_date }}</td>
+                            <td>{{ task.is_completed|yesno }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for task in project.tasks.all %}
-                            <tr>
-                                <td>{{ task.name }}</td>
-                                <td>{{ task.assignee.username }}</td>
-                                <td>{{ task.start_date }}</td>
-                                <td>{{ task.due_date }}</td>
-                                <td>{{ task.is_completed|yesno }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>This project has no tasks</p>
-            {% endif %}
-        </main>
-    </body>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>This project has no tasks</p>
+        {% endif %}
+        <a href="{% url 'create_project' %}"><lord-icon
+            src="https://cdn.lordicon.com/mecwbjnp.json"
+            trigger="hover"
+            colors="primary:#121331,secondary:#08a88a"
+            style="width:25px;">
+        </lord-icon></a>
+    </main>
+{% endblock content %}
 </html>

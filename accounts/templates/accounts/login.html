@@ -1,45 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    {% if user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'show_my_tasks' %}">My tasks</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'list_projects' %}">My projects</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'logout' %}">Logout</a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{% url 'login' %}">Login</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'signup' %}">Signup</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <div>
-                <h1>Login</h1>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button>Login</button>
-                </form>
-            </div>
-        </main>
-    </body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Sign Up
+{% endblock title %}
+{% block content %}
+    <header>
+        <div>
+            <h1>Login</h1>
+        </div>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <div>
+                        <a href="{% url 'show_my_tasks' %}">My tasks</a>
+                        <a href="{% url 'list_projects' %}">My projects</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                {% else %}
+                    
+                    <div>
+                        <a href="{% url 'signup' %}">Signup</a>
+                    </div>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button>Login</button>
+            </form>
+        </div>
+    </main>
+{% endblock content %}
 </html>

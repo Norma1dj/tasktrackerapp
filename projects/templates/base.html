@@ -1,0 +1,24 @@
+<!-- comments in html -->
+{% load static %}
+
+<!-- href=" {% static 'css/recipes.css' %}"> -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+        <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+        <footer>
+        </footer>
+    </body>
+</html>
