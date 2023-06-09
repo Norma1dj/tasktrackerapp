@@ -2,12 +2,68 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Montserrat:wght@400;500;700&display=swap');
 
+
+
+.styled-table {
+    border-collapse: collapse;
+    margin: auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    font-family: Montserrat;
+    
+    
+}
+/* .styled-table tbody tr:hover {
+    background-color: #ffff99;
+} */
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr:hover {
+    border-bottom: 1px solid #dddddd;
+    font-size: larger;
+    
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tfoot td {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+
+
+.center_align_div {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+
+}
+
+
 .pretty-form {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
     background-color: #66eece;
-    
+    font-family: Montserrat;
     border-radius: 5px;
   }
   
@@ -58,4 +114,3 @@ nav {
     padding: 0;
   }
 
-  

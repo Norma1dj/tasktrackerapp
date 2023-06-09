@@ -8,25 +8,24 @@
 {% block content %}
     <header>
         <div>
-            <a href="{% url 'list_projects' %}"><lord-icon src="https://cdn.lordicon.com/gmzxduhd.json" trigger="hover" colors="primary:#121331,secondary:#08a88a" style="width:50px"></a>
-            <a href="{% url 'show_my_tasks' %}"><lord-icon src="https://cdn.lordicon.com/nocovwne.json" trigger="hover" colors="primary:#121331,secondary:#08a88a" style="width:50px;">
+            <a href="{% url 'list_projects' %}"><lord-icon src="https://cdn.lordicon.com/gmzxduhd.json" trigger="hover" title="My Projects" colors="primary:#121331,secondary:#08a88a" style="width:50px"></a>
+            <a href="{% url 'show_my_tasks' %}"><lord-icon src="https://cdn.lordicon.com/nocovwne.json" trigger="hover" title="My Tasks" colors="primary:#121331,secondary:#08a88a" style="width:50px;">
             </lord-icon></a>
             </lord-icon>
         </div>
-        <div>
-            <h1>{{ project.name }}</h1>
-            <p >{{ project.description }}</p>
+        <div class="center_align_div">
+            <h1>{{ project.name }} Tasks</h1>
+            <p>{{ project.description }}</p>
         </div>
         <nav>
             <ul>
                 {% if user.is_authenticated %}
-                  
-                <div>
-                    <a href="{% url 'logout' %}">
-                        <lord-icon src="https://cdn.lordicon.com/moscwhoj.json" trigger="hover" colors="primary:#121331,secondary:#08a88a" style="width:50px;height:50px">
-                        </lord-icon>
-                    </lord-icon></a>
-                </div>
+                    <div>
+                        <a href="{% url 'logout' %}">
+                            <lord-icon src="https://cdn.lordicon.com/moscwhoj.json" trigger="hover" title="Logout" colors="primary:#121331,secondary:#08a88a" style="width:50px;height:50px">
+                            </lord-icon>
+                        </lord-icon></a>
+                    </div>
                 {% else %}
                     <li>
                         <a href="{% url 'login' %}">Login</a>
@@ -39,12 +38,8 @@
         </nav>
     </header>
     <main>
-        <div>
-            <h2>Tasks</h2>
-         
-        </div>
         {% if project.tasks.exists %}
-            <table>
+            <table class="styled-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -56,7 +51,7 @@
                 </thead>
                 <tbody>
                     {% for task in project.tasks.all %}
-                        <tr>
+                        <tr class="active-row">
                             <td>{{ task.name }}</td>
                             <td>{{ task.assignee.username }}</td>
                             <td>{{ task.start_date }}</td>
@@ -65,16 +60,22 @@
                         </tr>
                     {% endfor %}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <a  class="create_button" href="{% url 'create_task' %}"><lord-icon src="https://cdn.lordicon.com/mecwbjnp.json" trigger="hover" title="Creat a New Task" colors="primary:#121331,secondary:#08a88a" style="width:25px;">
+                            </lord-icon></a>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         {% else %}
             <p>This project has no tasks</p>
+            <a  class="create_button" href="{% url 'create_task' %}"><lord-icon src="https://cdn.lordicon.com/mecwbjnp.json" trigger="hover" title="Creat a New Task" colors="primary:#121331,secondary:#08a88a" style="width:25px;">
+            </lord-icon></a>
         {% endif %}
-        <a href="{% url 'create_project' %}"><lord-icon
-            src="https://cdn.lordicon.com/mecwbjnp.json"
-            trigger="hover"
-            colors="primary:#121331,secondary:#08a88a"
-            style="width:25px;">
-        </lord-icon></a>
     </main>
 {% endblock content %}
 </html>
+
+<!-- <div> Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div> -->

@@ -7,31 +7,32 @@
 {% endblock title %}
 {% block content %}
     <header>
+        <div></div>
         <div>
-            <h1>Signup</h1>
+            <h1>Sign Up</h1>
         </div>
         <nav>
             <ul>
-                {% if user.is_authenticated %}
+                {% if user.not_authenticated %}
                     <div>
                         <a href="{% url 'show_my_tasks' %}">My tasks</a>
                         <a href="{% url 'list_projects' %}">My projects</a>
                         <a href="{% url 'logout' %}">Logout</a>
                     </div>
                 {% else %}
-                    <div> <a href="{% url 'login' %}">Login</a></div>
-                    
-                    
+                    <div>
+                        <a href="{% url 'login' %}">Login</a>
+                    </div>
                 {% endif %}
             </ul>
         </nav>
     </header>
     <main>
         <div>
-            <form method="post">
+            <form method="post" class="pretty-form">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button>Signup</button>
+                <div class="form-group">{{ form.as_p }}</div>
+                <button type="submit" class="submit-button">Sign up</button>
             </form>
         </div>
     </main>
